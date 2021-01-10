@@ -1,8 +1,8 @@
 import React from 'react';
 
 import home1 from '../images/home1.png';
+// framer-motion
 // styled components!!!!!!!!!!!!! AWESOME!
-// import styled from 'styled-components';
 import {
   StyledAbout,
   StyledDescription,
@@ -10,36 +10,41 @@ import {
   StyledHide,
 } from '../styles';
 
+import { motion } from 'framer-motion';
+import { titleAnim, fade, photoAnim } from '../animation';
+import Wave from './wave';
+import SendEmail from '../components/SendEmail'
+
 const AboutSection = () => {
+  
   return (
     <StyledAbout>
       <StyledDescription>
-        <div className="title">
+        <motion.div>
           <StyledHide>
-            <h2>We work to make</h2>
+            <motion.h2 variants={titleAnim}>We work to make</motion.h2>
           </StyledHide>
           <StyledHide>
-            <h2>
+            <motion.h2 variants={titleAnim}>
               your <span>dreams</span> come
-            </h2>
+            </motion.h2>
           </StyledHide>
           <StyledHide>
-            <h2>true.</h2>
+            <motion.h2 variants={titleAnim}>true.</motion.h2>
           </StyledHide>
-        </div>
-        <p>
+        </motion.div>
+        <motion.p variants={fade}>
           Contact us for any ideas that you have. We can turn your dreams into
           reality.
-        </p>
-        <button>Contact Us</button>
+        </motion.p>
+        <motion.button variants={fade} onClick={SendEmail}>Contact Us</motion.button>
       </StyledDescription>
       <StyledImage>
-        <img src={home1} alt="Guy with a camera" />
+        <motion.img variants={photoAnim} src={home1} alt="Guy with a camera" />
       </StyledImage>
+      <Wave />
     </StyledAbout>
   );
 };
-
-
 
 export default AboutSection;

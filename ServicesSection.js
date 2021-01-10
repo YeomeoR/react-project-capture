@@ -7,16 +7,16 @@ import teamwork from '../images/teamwork.svg';
 //import images
 import home2 from '../images/home2.png';
 // styled components
-import styled from 'styled-components'
-import {
-  StyledAbout,
-  StyledDescription,
-  StyledImage,
-} from '../styles';
+import styled from 'styled-components';
+import { fade } from '../animation';
+import { StyledAbout, StyledDescription, StyledImage } from '../styles';
+import { useScroll } from './useScroll';
 
 const ServicesSection = () => {
+  const [element, controls] = useScroll();
   return (
-    <Services>
+    // <Services could have scrollReveal instead of fade if imported from ../animation, above.
+    <Services variants={fade} animate={controls} initial="hidden" ref={element}>
       <StyledDescription>
         <h2>
           High <span>Quality </span>Services
@@ -52,40 +52,44 @@ const ServicesSection = () => {
           </Card>
         </Cards>
       </StyledDescription>
-        <StyledImage>
-          <img src={home2} alt="cam" />
-        </StyledImage>
+      <StyledImage>
+        <img src={home2} alt="cam" />
+      </StyledImage>
     </Services>
   );
 };
 
 const Services = styled(StyledAbout)`
-h2 {
-  padding-bottom: 5rem;
-}
-p {
-  width: 70%;
-  padding: 2rem 0rem 4rem 0rem;
-}
+  h2 {
+    padding-bottom: 5rem;
+  }
+  p {
+    width: 70%;
+    padding: 2rem 0rem 4rem 0rem;
+  }
+ 
 `;
 
 const Cards = styled.div`
-display: flex;
-flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
+  @media (max-width: 1300px) {
+    justify-content: center;
+}
 `;
 
 const Card = styled.div`
-flex-basis: 20rem;
-.icon {
-  display: flex;
-  align-items: center;
-  h3 {
-    margin-left: 1rem;
-    background: white;
-    color: black;
-    padding: 1rem; 
+  flex-basis: 20rem;
+  .icon {
+    display: flex;
+    align-items: center;
+    h3 {
+      margin-left: 1rem;
+      background: white;
+      color: black;
+      padding: 1rem;
+    }
   }
-}
 `;
 
 export default ServicesSection;
